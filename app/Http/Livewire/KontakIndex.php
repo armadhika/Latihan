@@ -14,24 +14,29 @@ class KontakIndex extends Component
     public $search;
     public $newdata;
     public $paginate = 5;
-    public $showupdate = false;
+    public $showAdd = "hide";
+    public $Batal = "add";
 
-    protected $listeners = ['conIndex','kontakUpdate','add'];
+    protected $listeners = ['conIndex','kontakUpdate','showAdd'];
 
     // public function mount()
     // {
     //     $this->data = Kontak::all();
     // }
     
-    public function add()
+    public function showAdd()
     {
-         return redirect('create-kontak');
+        $this->showAdd = "add";
     }
 
+    public function Batal()
+    {
+        $this->showAdd = "hide";
+    }
 
     public function conIndex($kontak)
     {
-        session()->flash('Pesan','Data Terimpan');
+        session()->flash('Pesan','Data  Terimpan');
     }
 
     public function kontakUpdate()
@@ -51,7 +56,7 @@ class KontakIndex extends Component
 
     public function getKontak($id)
     {
-        $this->showupdate = 'true';
+        $this->showAdd = "edit";
         $kontak = Kontak::find($id);
         $this->emit('getKontak',$kontak);
     }

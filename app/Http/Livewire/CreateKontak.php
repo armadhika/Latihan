@@ -10,6 +10,7 @@ class CreateKontak extends Component
 
     public $name;
     public $phone;
+    public $quantity;
     public $data;
     public $pilih;
     public $kontakid;
@@ -50,9 +51,5 @@ class CreateKontak extends Component
         $this->resetInput();
         $this->emit('conIndex', $kontak);
     
-    }
-    public function newdata()
-    {
-        return view('livewire.create-kontak');
     }
 }

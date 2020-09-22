@@ -28,10 +28,6 @@
         @enderror
     </div>
     <div class="col-md-3 mb-3">
-      <label for="phone">Tanggal</label>
-      <input class="form-control date-picker" wire:model="tgl" placeholder="Tanggal" >
-    </div>
-    <div class="col-md-3 mb-3">
     <label for="">Pilih</label>
     <select class="form-control" wire:model="pilih" wire:click="tampil_row">
       <option value="">Pilih</option>
@@ -41,7 +37,7 @@
     </div>
     @if($tampil_row)
     <div class="col-md-3 mb-3">
-      <label for="">Pilih</label>
+      <label for="">Kolom Baru</label>
       <input type="text" class="form-control">
     </div>
     @endif

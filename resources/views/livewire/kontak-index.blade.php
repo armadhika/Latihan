@@ -1,8 +1,10 @@
 <div>
-  @if($showupdate)
-    @livewire('edit-kontak')
-  @else
+  @if($showAdd == "hide")
+
+  @elseif ($showAdd == "add")
     @livewire('create-kontak')
+  @elseif ($showAdd == 'edit')
+    @livewire('edit-kontak')
   @endif
 
 @if(session()->has('Pesan'))
@@ -31,7 +33,13 @@
   </button>
 </div>
 @endif
-<!-- <button wire:click="add" class="btn btn-success" >Tambah</button> -->
+<button wire:click="showAdd" class="btn btn-success" >Tambah</button>
+@if($showAdd == "add" || $showAdd == "edit")
+  <button wire:click="Batal" class="btn btn-danger">Batal</button>
+@endif
+    <div wire:loading>
+        Processing Payment...
+    </div>
 <hr>
 <div class="row">
   <div class="col">
@@ -42,7 +50,7 @@
     </select>
   </div>
   <div class="cal">
-    <input type="text" class="form-control form-control-sm" placeholder="pencarian" wire:model="search">
+    <input type="text" class="form-control form-control-sm" placeholder="Pencarian" wire:model="search">
   </div>
 </div>
 <br>
@@ -56,17 +64,14 @@
     </tr>
   </thead>
   <tbody>
-  @php 
-  $no = 1;
-  @endphp
-  @foreach($data as $d)
+  @foreach($data as $no => $d)
     <tr>
-      <th scope="row">{{ $no++ }}</th>
+      <th scope="row">{{ $no+1 }}</th>
       <td>{{$d->name}}</td>
       <td>{{$d->phone}}</td>
       <td>
-        <button wire:click="getKontak({{ $d->id }})"> Edit </button>
-        <button wire:click="hapus({{ $d->id }})"> Hapus </button>
+        <button wire:click="getKontak({{ $d->id }})" class="btn btn-warning"> Edit </button>
+        <button wire:click="hapus({{ $d->id }})" onclick="confirm('Hapus Data?')" class="btn btn-danger"> Hapus </button>
       </td>
     </tr>
   @endforeach
